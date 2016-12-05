@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  gather_facts: False
+  vars:
+    region: us-west-2
+    iam_template: iam_role.yml
+    kms_key: 4bacdbef-cc46-41fd-b333-2623977cbf83
+
+  tasks:
+    - name: Create Codebuild Role
+      cloudformation:
+        template: "{{ iam_template }}"
+        region: "{{ region }}"
+        stack_name: "codebuild-credstash-docker"
+        template_parameters:
+          KMSKey: "{{kms_key}}"
+
+        # security_token: "{{ lookup('env','AWS_SESSION_TOKEN') }}"
+        tags:
+          "kloudcover:env": "dev"
+          "kloudcover:unit": "techops"
+          "kloudcover:owner": "kevin@kloudcover.com"
