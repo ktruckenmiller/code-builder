@@ -3,6 +3,7 @@ phases:
   install:
     commands:
       - env
+      - set -x
       - echo $ACTIVITY_ARN
       - "TASK_ID=$(aws cloudformation list-exports --query 'Exports[0].Name')"
       - echo $TASK_ID
