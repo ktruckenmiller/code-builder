@@ -20,6 +20,6 @@ phases:
       # - docker push $ORG_NAME/$IMAGE_NAME:$IMAGE_TAG
   post_build:
     commands:
-      - echo sending back response to state machine that we are good to go
+      - echo "sending back response to state machine that we are good to go"
       - echo \"{'codebuild_id': '$CODEBUILD_BUILD_ID'}\"
       # - "aws stepfunctions send-task-success --task-token $TASK_ID --task-output '{\"err\": \"false\", \"tag\": \"$TAG\", \"repo_name\": \"$REPO_NAME\", \"codebuild_id\": \"$CODEBUILD_BUILD_ID\"}'"
