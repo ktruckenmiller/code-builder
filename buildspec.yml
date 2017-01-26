@@ -27,5 +27,5 @@ phases:
     commands:
       - echo sending back response to state machine that we are good to go
       - echo $BOSTON
-      - echo '{\"codebuild_id\": \"$CODEBUILD_BUILD_ID\"}' > boston.txt
+      - echo {\"codebuild_id\": \"$CODEBUILD_BUILD_ID\"} > boston.txt
       - cat boston.txt
