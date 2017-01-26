@@ -3,13 +3,8 @@ phases:
   install:
     commands:
       - env
-      - set -x
-      - echo $ACTIVITY_ARN
-      - export BOSTON=$(aws cloudformation list-exports --query \'Exports[0].Name\')
-      - echo $BOSTON
-      # - echo $(aws cloudformation list-exports --query \'Exports[0].Name\') | dd of=TASK_ID.txt
+      # - aws cloudformation list-exports --query \'Exports[0].Name\' | sed 's/\"//g' > task_id.txt
       # - echo $(cat TASK_ID.txt)
-      - echo installing credstash
       # - pip install credstash
   pre_build:
     commands:
@@ -26,5 +21,5 @@ phases:
   post_build:
     commands:
       - echo sending back response to state machine that we are good to go
-      - echo $BOSTON
+      - "echo '{\"codebuild_id\": \"${CODEBUILD_BUILD_ID}\"}'"
       # - "aws stepfunctions send-task-success --task-token $TASK_ID --task-output '{\"err\": \"false\", \"tag\": \"$TAG\", \"repo_name\": \"$REPO_NAME\", \"codebuild_id\": \"$CODEBUILD_BUILD_ID\"}'"
