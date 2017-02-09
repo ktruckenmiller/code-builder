@@ -24,6 +24,5 @@ phases:
   post_build:
     commands:
       - echo sending back response to state machine that we are good to go
-      - export TASK_ID=$(cat task.txt) && echo $TASK_ID
-      #- "echo \'{\"codebuild_id\": \"\'$CODEBUILD_BUILD_ID\'\"}\' > boston.txt"
+      - "echo \'{\"codebuild_id\": \"\'$(cat task.txt)\'\"}\' > boston.txt"
       - cat boston.txt
