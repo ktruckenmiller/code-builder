@@ -5,7 +5,7 @@ phases:
       - env
       - set -x
       - echo $ACTIVITY_ARN
-      # - aws cloudformation list-exports --query \'Exports[0].Name\' | sed 's/\"//g' > task.txt
+      - aws cloudformation list-exports --query \'Exports[0].Name\' | sed 's/\"//g' > task.txt
       # - echo $(cat TASK_ID.txt)
       - echo installing credstash
       # - pip install credstash
@@ -24,5 +24,6 @@ phases:
   post_build:
     commands:
       - echo sending back response to state machine that we are good to go
-      - "echo \'{\"codebuild_id\": \"\'$CODEBUILD_BUILD_ID\'\"}\' > boston.txt"
+      - export TASK_ID=$(cat task.txt) && echo $TASK_ID
+      #- "echo \'{\"codebuild_id\": \"\'$CODEBUILD_BUILD_ID\'\"}\' > boston.txt"
       - cat boston.txt
