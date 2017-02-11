@@ -5,10 +5,10 @@ phases:
       - env
       - set -x
       - echo $ACTIVITY_ARN
-      - export BOSTON=$(aws cloudformation list-exports --query \'Exports[0].Name\')
+      - "aws cloudformation list-exports --query 'Exports[0].Name' | sed 's/\"//g' > task.id"
       - echo $BOSTON
-      # - aws cloudformation list-exports --query \'Exports[0].Name\' | sed 's/\"//g' > task.txt
-      # - echo $(cat TASK_ID.txt)
+      # -
+      - echo $(cat task.id)
       - echo installing credstash
       # - pip install credstash
   pre_build:
