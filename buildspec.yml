@@ -7,8 +7,8 @@ phases:
       - "aws cloudformation list-exports --query 'Exports[0].Name' --next-token $ACTIVITY_ARN | sed 's/\"//g' > task.id"
       - echo $BOSTON
       # -
-      - "[[ -f task.id ]] || echo $(cat task.id)"
-      - "[[ ! -f task.id ]] || echo $(cat task.id)"
+      - "\[\[ -f task.id \]\] || echo $(cat task.id)"
+      - "\[\[ ! -f task.id \]\] || echo $(cat task.id)"
       - echo installing credstash
       # - pip install credstash
   pre_build:
