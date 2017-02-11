@@ -4,8 +4,7 @@ phases:
     commands:
       - env
       - set -x
-      - echo $ACTIVITY_ARN
-      - "aws cloudformation list-exports --query 'Exports[0].Name' | sed 's/\"//g' > task.id"
+      - "aws cloudformation list-exports --query 'Exports[0].Name' --next-token '$ACTIVITY_ARN' | sed 's/\"//g' > task.id"
       - echo $BOSTON
       # -
       - echo $(cat task.id)
